@@ -4,7 +4,7 @@ const {insertuser,updateuser,getuserloginpassword,getuserEmail} = require('./use
 
 router.post('/userinsert',insertuser);
 router.patch('/updateuser',updateuser);
-router.get('/loginpassword/:id',getuserloginpassword);
+router.post('/loginpassword',getuserloginpassword);
 router.get('/getemail/:id',getuserEmail);
 
 module.exports=router;

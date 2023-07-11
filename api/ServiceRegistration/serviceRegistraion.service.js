@@ -1,10 +1,4 @@
-const mysql = require("mysql");
-var pool = mysql.createPool({
-  host: "143.198.103.241",
-  user: "dbu1",
-  password: "DBuser1pass",
-  database: "db1",
-});
+const pool = require('../../databaseconnection');
 
 module.exports = {
   insertservicereg: (data, callback) => {
@@ -49,7 +43,7 @@ module.exports = {
         data.serv_location,
         data.vehicle_id,
         data.vehicle_name,
-        data.reg_slno,
+        data.reg_slno
       ],
       (error, results, fields) => {
         if (error) {

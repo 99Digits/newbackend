@@ -1,11 +1,20 @@
-const mysql = require("mysql");
-var pool = mysql.createConnection({
-  host:'localhost',
-  user:"root",
-  password:"",
-  database:'handyman',
-});
+// const mysql = require("mysql");
+// var pool = mysql.createConnection({
+//   host:process.env.host,
+//   user:process.env.username,
+//   password:process.env.password,
+//   database:process.env.DATABASE,
+// });
 
+// var con = mysql.createConnection({
+//   host:'localhost',
+//   user:'root',
+//   password:'',
+//   database:'handyman'
+// })
+const pool = require('../../databaseconnection')
+
+const jwt = require('jsonwebtoken');
 
 module.exports={
     insertuser:(data,callback)=>{
@@ -65,13 +74,19 @@ module.exports={
 
 
 
-    getuserloginpassword:(id,callback)=>{
-      pool.query(`SELECT user_pasword FROM user_creation WHERE email=?`,
-      [id],
+    getuserloginpassword:(data,callback)=>{
+      con.query(`SELECT user_fname FROM user_creation WHERE email=? and user_pasword =?`,
+      [
+        data.email,
+        data.user_pasword
+    ],
       (error,results,feilds)=>{
         if(error){
           return callback(error)
         }
+        // const token = jwt.sign({
+        //   email: data.email
+        //   },'super')
         return callback(null,results);
       },
       )
